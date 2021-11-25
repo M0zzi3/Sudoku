@@ -6,7 +6,8 @@ public class Sudoku_Game {
     int sq_size;
     int[][]map_data;
     int map_size;
-    Map<int[], ArrayList<Integer>> candidates_D;
+    Map<String, ArrayList<Integer>> candidates_D;
+    ArrayList<String> filled_places;
     int[] numbs;
     Random rand;
 
@@ -20,7 +21,8 @@ public class Sudoku_Game {
         this.sq_size = size;
         this.map_size = this.sq_size *this.sq_size;
         this.map_data = new int[this.map_size][this.map_size];
-        this.candidates_D = new HashMap<int[], ArrayList<Integer>>();
+        this.candidates_D = new HashMap<>();
+        this.filled_places = new ArrayList<>();
         this.numbs = new int[this.map_size];
         this.rand = new Random();
 
@@ -32,20 +34,13 @@ public class Sudoku_Game {
         //Generate HashMap with all candidates for all places
         for (int y = 0; y < this.map_size; y++){
             for(int x = 0; x < this.map_size; x++){
-
-                int[] place = {y,x};
-                this.candidates_D.put(place, new ArrayList<>());
-                for(int candidate_Indx = 0; candidate_Indx < this.map_size; candidate_Indx++){
-                    this.candidates_D.get(place).add(this.numbs[candidate_Indx]);
+                String place = x+""+y;
+                candidates_D.put(place, new ArrayList<>());
+                for(int candidateIndex = 0; candidateIndex < this.map_size; candidateIndex++){
+                    candidates_D.get(place).add(this.numbs[candidateIndex]);
                 }
             }
         }
-
-
-
-//        for (Map.Entry<int[], ArrayList<Integer>> entry : this.candidates_D .entrySet()) {
-//            System.out.println(this.PlaceData(entry.getKey())+" : "+entry.getValue());
-//        }
 
 
 
@@ -53,7 +48,7 @@ public class Sudoku_Game {
 
         //Find cords for that square
         int middle_of_map = this.sq_size /2;
-        int[] randomSquare_startPoint = new int[] {middle_of_map*this.sq_size +1, middle_of_map*this.sq_size +1};
+        int[] randomSquare_startPoint = new int[] {middle_of_map*this.sq_size, middle_of_map*this.sq_size};
 
         //Generate random order in that square
         ArrayList<Integer> candidatesIndex_List = new ArrayList<>();
@@ -67,45 +62,53 @@ public class Sudoku_Game {
 
                 int rSqY = randomSquare_startPoint[0]+randomSquareY;
                 int rSqX = randomSquare_startPoint[1]+randomSquareX;
-                int[] place = {rSqY, rSqX};
+                String place = rSqY+""+rSqX;
 
-
-//                this.map_data[rSqY][rSqY] = candidate;
-//                this.candidates_D.get(place).remove(candidateIndex);
+                //Set number function
 
                 candidateIndex++;
             }
         }
 
 
+        for (Map.Entry<String, ArrayList<Integer>> entry : candidates_D . entrySet()){
+            System.out.println(entry.getKey()+" : "+entry.getValue());
+        }
 
 
 
 
 
-
-
-
-
-
-
+        //End all generate algorithm
 
         long elapsedTime = System.nanoTime() - start_time;
         double time = Math.round(elapsedTime * 0.0000001) / 100.0;
         System.out.println("Map generated in: " + time + "s");
     }
 
+
+    private void Set_Number(int numb, int[] place){
+        ;
+
+    }
+
+
     public void Show_Map(){
+        int mapSize_length = Integer.toString(this.map_size).length();
+
         for (int y = 0; y < this.map_size; y++) {
             for (int x = 0; x < this.map_size; x++) {
                 System.out.print(this.map_data[y][x]+" ");
+                int numb_length = Integer.toString(this.map_data[y][x]).length();
+                int length = mapSize_length - numb_length;
+
+                for(int i = 0; i < length; i++){
+                    System.out.print(" ");
+                }
+
             }System.out.println("");
         }
     }
 
-
-    private String PlaceData(int[] data){
-        return data[0]+" "+data[1];
-    }
 
 }
