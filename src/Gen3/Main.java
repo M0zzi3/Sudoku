@@ -3,9 +3,7 @@ package Gen3;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code her
-        System.out.println("tets1");
-        //asfdasfadf
-        System.out.println("fsafasf");
+        Sudoku_Game s = new Sudoku_Game(3);
+        s.Show_Map();
     }
 }
