@@ -71,7 +71,12 @@ public class Sudoku_Game {
             //Find all vertical squares in that level of encirclement
             for(int ver = 0; ver < 2-this.rest + enc*2; ver++){
                 //Find pos correspond to enc and ver
-                ;
+                System.out.println("Vertical up : "+(center_squarePos-((enc+1)*this.sq_size) -this.sq_size + (this.rest*this.sq_size))+" "+(center_squarePos -(ver*this.sq_size) + (enc*this.sq_size)));
+                System.out.println("Vertical down : "+(center_squarePos+((enc+1)*this.sq_size))+" "+(center_squarePos -(ver*this.sq_size) + (enc*this.sq_size)));
+                System.out.println("Horizontal Left  : "+(center_squarePos-(ver*this.sq_size)+(enc*this.sq_size))+" "+(center_squarePos-((enc+1)*this.sq_size)-this.sq_size+(this.rest*this.sq_size)));
+
+
+
             }
 
         }
